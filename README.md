@@ -18,8 +18,16 @@ La aplicación se compone de dos servicios principales:
 * No expone ningún puerto al exterior (a la máquina "host"); solo es accesible por el servicio `web` a través de la red interna de Docker.
 
 ## Estructura de Archivos
+
 /
-├── docker-compose.yml # El plano que define y conecta los servicios ├── Dockerfile # Las instrucciones para construir la imagen de la app 'web' ├── app.py # El código fuente de la aplicación Flask (rutas, lógica CRUD) ├── requirements.txt # Las dependencias de Python (flask, redis) ├── templates/ │ └── index.html # La plantilla HTML para la interfaz de usuario │ └── start_app(change_route).bat # Script para iniciar la app en Windows
+├── docker-compose.yml   # El plano que define y conecta los servicios
+├── Dockerfile           # Las instrucciones para construir la imagen de la app 'web'
+├── app.py               # El código fuente de la aplicación Flask (rutas, lógica CRUD)
+├── requirements.txt     # Las dependencias de Python (flask, redis)
+├── templates/
+│   └── index.html       # La plantilla HTML para la interfaz de usuario
+│
+└── start_app(change_route).bat  # Script para iniciar la app en Windows
 
 **Descripción de Archivos:**
 
