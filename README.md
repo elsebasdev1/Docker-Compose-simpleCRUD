@@ -70,5 +70,4 @@ Para limpiar y eliminar los contenedores y la red, ejecuta:
 
 ```bash
 docker-compose down
-
-
+```
