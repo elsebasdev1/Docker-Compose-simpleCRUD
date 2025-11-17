@@ -28,6 +28,7 @@ La aplicación se compone de dos servicios principales:
 │   └── index.html       # La plantilla HTML para la interfaz de usuario
 │
 └── start_app(change_route).bat  # Script para iniciar la app en Windows
+```
 
 **Descripción de Archivos:**
 
