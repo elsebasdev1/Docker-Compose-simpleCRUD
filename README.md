@@ -1,6 +1,8 @@
 # Proyecto: CRUD de Tareas con Microservicios (Flask + Redis) y Docker Compose
 
 Este proyecto es una aplicación web simple para gestionar una lista de tareas (CRUD: Crear, Leer, Actualizar, Borrar). Está construida siguiendo una arquitectura de microservicios y es orquestada usando Docker Compose.
+<img width="1550" height="1112" alt="Screenshot 2025-11-17 164535" src="https://github.com/user-attachments/assets/5b010763-91d2-4e55-bf00-82f47910daae" />
+<img width="1556" height="979" alt="Screenshot 2025-11-17 164646" src="https://github.com/user-attachments/assets/171ef0a5-b5ea-4488-9f39-d419a3c60883" />
 
 ## Arquitectura
 
