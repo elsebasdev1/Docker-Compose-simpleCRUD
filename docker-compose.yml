@@ -1,0 +1,27 @@
+# Especifica la versión de la sintaxis de Docker Compose
+version: '3.8'
+
+# Define los servicios (contenedores) que componen nuestra app
+services:
+  
+  # Este es nuestro servicio de aplicación web
+  web:
+    # 'build: .' le dice a Compose que construya una imagen
+    # usando el 'Dockerfile' en el directorio actual.
+    build: .
+    ports:
+      - "8000:5000"
+    # 'volumes' sincroniza la carpeta actual ('.')
+    # con la carpeta '/code' dentro del contenedor.
+    volumes:
+      - .:/code
+    # 'depends_on' le dice a Compose que inicie el servicio
+    # 'redis' ANTES de iniciar el servicio 'web'.
+    depends_on:
+      - redis
+
+  # Este es nuestro servicio de base de datos
+  redis:
+    # 'image' le dice a Compose que descargue la imagen oficial
+    # 'redis' con la etiqueta 'alpine' (que es muy ligera).
+    image: "redis:alpine"

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD con Flask y Redis</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+               background-color: #f4f4f9; color: #333; margin: 0; padding: 2rem; }
+        .container { max-width: 800px; margin: auto; background: #fff; 
+                     border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); padding: 2rem; }
+        h1, h2 { color: #1a2b4d; }
+        h1 { text-align: center; }
+        .status { padding: 10px; border-radius: 5px; margin-bottom: 20px; text-align: center; font-weight: bold; }
+        .status.connected { background: #d4edda; color: #155724; }
+        .status.disconnected { background: #f8d7da; color: #721c24; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #e9ecef; }
+        form { margin-bottom: 20px; }
+        .form-inline { display: flex; margin-top: 10px; }
+        .form-inline input[type="text"] { flex-grow: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .form-inline button { padding: 8px 12px; background: #007bff; color: white; border: none; 
+                              border-radius: 4px; margin-left: 10px; cursor: pointer; }
+        .form-inline button.delete { background: #dc3545; }
+        .form-inline button.update { background: #28a745; }
+        .form-add input { width: calc(100% - 100px); padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        .form-add button { width: 90px; padding: 10px; background: #007bff; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer; margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Aplicación CRUD</h1>
+
+        <!-- REQUERIMIENTO 1: Mostrar estado de la conexión a Redis -->
+        <div class="status {{ status_class }}">
+            Estado de la conexión con Redis: <strong>{{ redis_status }}</strong>
+        </div>
+
+        <!-- REQUERIMIENTO 2: CRUD (Create) -->
+        <h2>Añadir Nuevo Elemento</h2>
+        <form action="/add" method="POST" class="form-add">
+            <input type="text" name="task" placeholder="Escribe tu tarea aquí" required>
+            <p> </p>
+            <button type="submit">Añadir</button>
+        </form>
+
+        <!-- REQUERIMIENTO 2: CRUD (Read) -->
+        <h2>Lista de Elementos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción del Elemento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 
+                  Aquí usamos un bucle de Jinja2 para crear una fila (<tr>)
+                  por cada tarea que le pasemos desde Python.
+                -->
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.description }}</td> <!-- Jinja2 escapa el HTML por defecto, es seguro -->
+                    <td style="width: 300px;">
+                        <!-- REQUERIMIENTO 2: CRUD (Update) -->
+                        <form action="/update/{{ task.id }}" method="POST" class="form-inline">
+                            <input type="text" name="new_task" placeholder="Nuevo nombre" required>
+                            <button type="submit" class="update">Editar</button>
+                        </form>
+                        
+                        <!-- REQUERIMIENTO 2: CRUD (Delete) -->
+                        <form action="/delete/{{ task.id }}" method="POST" class="form-inline" style="margin-top:5px;">
+                            <button type="submit" class="delete">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <!-- Esto se muestra si la lista de 'tasks' está vacía -->
+                <tr>
+                    <td colspan="3" style="text-align:center;">No hay tareas todavía.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
