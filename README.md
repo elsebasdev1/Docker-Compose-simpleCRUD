@@ -18,7 +18,7 @@ La aplicación se compone de dos servicios principales:
 * No expone ningún puerto al exterior (a la máquina "host"); solo es accesible por el servicio `web` a través de la red interna de Docker.
 
 ## Estructura de Archivos
-
+```bash
 /
 ├── docker-compose.yml   # El plano que define y conecta los servicios
 ├── Dockerfile           # Las instrucciones para construir la imagen de la app 'web'
